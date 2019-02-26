@@ -1,0 +1,58 @@
+﻿@model BarkodSistem.Models.QrCodeInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>QrCodeInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TETT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TETT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QrCodeInfoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
