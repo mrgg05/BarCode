@@ -3,6 +3,13 @@
 @{
     ViewBag.Title = "Index";
 }
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QR Generate</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
 
 <h2>Index</h2>
 <script src="~/Scripts/date.format.js"></script>
@@ -65,99 +72,87 @@
 
 
 
+<div class="row">
+    <div class="col-sm-8">
+        <table class="table" id="VeriEkle">
+            <tr>
 
-@*<table>
-        <tr>
-
-            <th >ProductName:</th>
-            <th >SKT:<strong ></strong></th>
-            <th >TETT:<strong ></strong></th>
-            <th >ProductionDate:</th>
-        </tr>
-
-
-
-        @*<tr >
-            <td id="ProductName"></td>
-            <td id="SKT"></td>
-            <td id="TETT"></td>
-            <td id="ProductionDate"></td>
-
-        </tr>
+               
+                <th>SKT:<strong></strong></th>
+              
+            </tr>
 
 
+        </table>
+    </div>
+    <div class="col-sm-4">
+
+        <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(ViewBag.imageBytes))" height="50" width="50" />
+
+        @*<form id="form1" runat="server" action="QrOlustur" method="post">
+
+        <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(ViewBag.imageBytes))" height="50" width="50" />
+        </form>**@
+
+    </div>
+
+</div>
 
 
-    </table>*@
 
-<div id="VeriEkle"></div>
 
-<input type="button" value="Tıkla" id="buton" />
+
+@*<input type="button" value="Tıkla" id="buton" />*@
 
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#buton').click(function () {
-
-            //var qr = new QrProductViewModels;
-            //qr.ProductName = $("#ProductName").val();
-            //qr.ProductionDate = $("#ProductionDate").val();
-            //qr.SKT = $("#SKT").val();
-            //qr.TETT = $("#TETT").val();
-
-            $.ajax({
-                type: "GET",
-                url: "/QrProduct/Listele",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-
-                success: function (data) {
-
-                    //var productslist = data;
-                    for (var i = 0; i < data.length; i++) {
-                        var nowDate = new Date(parseInt(data[i].SKT.substr(6)));
-                        data[i].SKT = nowDate.format("dd/mm/yyyy");
-                        data[i].TETT = nowDate.format("dd/mm/yyyy");
-                        data[i].ProductionDate = nowDate.format("dd/mm/yyyy");
-                        console.log(data)
-
-                        $("#VeriEkle").append( 
-                            " <tr>" +
-
-                            "<th>" + "ProductName:" + "</th>" +
-                            " <th>" + "SKT:" + "</th>" +
-                            " <th>" + "TETT:" + "</th>" +
-                            "<th >" + "ProductionDate:" + "</th>" +
-                            "</tr>" +
-
-                           
-
-                            " <tr >" +
-                            "<td>" + data[i].ProductName + "</td>" +
-                          
-                            "<td>" + (data[i].SKT) + "</td>" +
-                            "<td>" + (data[i].TETT) + "</td >" +
-                            " <td>" + (data[i].ProductionDate) + "</td >" +
-
-                            "</tr>" +
 
 
+        //var qr = new QrProductViewModels;
+        //qr.ProductName = $("#ProductName").val();
+        //qr.ProductionDate = $("#ProductionDate").val();
+        //qr.SKT = $("#SKT").val();
+        //qr.TETT = $("#TETT").val();
+
+        $.ajax({
+            type: "GET",
+            url: "/QrProduct/Listele",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+
+            success: function (data) {
+
+                //var productslist = data;
+                for (var i = 0; i < data.length; i++) {
+                    var nowDate = new Date(parseInt(data[i].SKT.substr(6)));
+                    data[i].SKT = nowDate.format("dd/mm/yyyy");
+                    data[i].TETT = nowDate.format("dd/mm/yyyy");
+                    data[i].ProductionDate = nowDate.format("dd/mm/yyyy");
+                    console.log(data)
 
 
-                            "</table>")
-                        //$("#ProductName").html(data[i].ProductName)
-                        //$("#SKT").html(data[i].SKT)
-                        //$("#TETT").html(data[i].TETT)
-                        //$("#ProductionDate").html(data[i].ProductionDate)
-                    };
+                    $("#VeriEkle").append(
+                        " <tr >" +
+                        "<td>" + (data[i].SKT) + "</td>" +
+                        "</tr>"
+                    )
 
 
-                }
-            })
+                 
+                    //$("#ProductName").html(data[i].ProductName)
+                    //$("#SKT").html(data[i].SKT)
+                    //$("#TETT").html(data[i].TETT)
+                    //$("#ProductionDate").html(data[i].ProductionDate)
+                };
 
-        });
+
+            }
+        })
+
+
     });
 </script>
 

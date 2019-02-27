@@ -109,3 +109,5 @@ C:\Users\Section1\source\repos\BarcodeSistem\BarkodSistem\obj\Debug\BarkodSistem
 C:\Users\Section1\source\repos\BarcodeSistem\BarkodSistem\obj\Debug\BarkodSistem.pdb
 C:\Users\Section1\source\repos\BarcodeSistem\BarkodSistem\obj\Debug\BarkodSistem.Migrations.aa.resources
 C:\Users\Section1\source\repos\BarcodeSistem\BarkodSistem\obj\Debug\BarkodSistem.csproj.GenerateResource.cache
+C:\Users\Section1\source\repos\BarcodeSistem\BarkodSistem\bin\QRCoder.dll
+C:\Users\Section1\source\repos\BarcodeSistem\BarkodSistem\bin\System.Drawing.Common.dll
