@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using QRCoder;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -19,18 +20,41 @@ namespace BarkodSistem.Controllers
         // GET: QrProduct
         public ActionResult Index()
         {
-            //QrProductViewModels vm = new QrProductViewModels()
-            //{
-            //    CategoryID=db.Products.FirstOrDefault().CategoryID,
-            //    ProductID=db.Products.FirstOrDefault().ProductID,
-            //    ProductionDate= db.Products.FirstOrDefault().QrCodeInfo.ProductionDate,
-            //    ProductName =db.Products.FirstOrDefault().ProductName,
-            //    Size=db.Products.FirstOrDefault().Size,
-            //    SKT=db.Products.FirstOrDefault().QrCodeInfo.SKT,
-            //    TETT= db.Products.FirstOrDefault().QrCodeInfo.TETT,
-            //    UnitsInStock =db.Products.FirstOrDefault().UnitsInStock,
+            var result = (from p in db.Products
+                          join a in db.QrCodeInfos on p.ProductID equals a.QrCodeInfoID
+                         
+                          select new QrProductViewModels
+                          {
+                              ProductID = p.ProductID,
+                              QrCodeInfoID = a.QrCodeInfoID,
+                              ProductName = p.ProductName,
+                              ProductionDate = a.ProductionDate,
+                              Size = p.Size,
+                              SKT = a.SKT,
+                              TETT = a.TETT,
+                              CategoryID = p.CategoryID,
+                              UnitsInStock = p.UnitsInStock
+                          }).ToList();
 
-            //};
+                ViewBag.QrCode = result.FirstOrDefault().SKT.ToString();
+                    
+
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(ViewBag.QrCode, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            //System.Web.UI.WebControls.Image imgBarCode = new System.Web.UI.WebControls.Image();
+            //imgBarCode.Height = 150;
+            //imgBarCode.Width = 150;
+            using (Bitmap bitMap = qrCode.GetGraphic(20))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    ViewBag.imageBytes = ms.ToArray();
+                    
+                    //imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+                }
+            }
 
             return View();
         }
@@ -79,8 +103,8 @@ namespace BarkodSistem.Controllers
                           join a in db.QrCodeInfos on p.ProductID equals a.QrCodeInfoID
                           select new QrProductViewModels
                           {
-                              //ProductID = p.ProductID,
-                              //QrCodeInfoID = a.QrCodeInfoID,
+                              ProductID = p.ProductID,
+                              QrCodeInfoID = a.QrCodeInfoID,
                               //ProductName = p.ProductName,
                               //ProductionDate = a.ProductionDate,
                               //Size = p.Size,
@@ -90,23 +114,7 @@ namespace BarkodSistem.Controllers
                               //UnitsInStock = p.UnitsInStock
                           }).ToList();
 
-            ViewBag.QrCode = result.FirstOrDefault().SKT.ToString();
-
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(ViewBag.QrCode, QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(qrCodeData);
-            //System.Web.UI.WebControls.Image imgBarCode = new System.Web.UI.WebControls.Image();
-            //imgBarCode.Height = 150;
-            //imgBarCode.Width = 150;
-            using (Bitmap bitMap = qrCode.GetGraphic(20))
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                    ViewBag.imageBytes = ms.ToArray();
-                    //imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
-                }
-            }
+        
 
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -117,7 +125,7 @@ namespace BarkodSistem.Controllers
         {
             var result = (from p in db.Products
                           join a in db.QrCodeInfos on p.ProductID equals a.QrCodeInfoID
-                          
+                         
                           select new QrProductViewModels
                           {
                               ProductID = p.ProductID,
@@ -147,6 +155,7 @@ namespace BarkodSistem.Controllers
                 {
                     bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                     ViewBag.imageBytes = ms.ToArray();
+                   
                     //imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
                 }
             }

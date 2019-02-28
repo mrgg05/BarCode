@@ -19,6 +19,7 @@ namespace BarkodSistem.Models
 
         public int UnitsInStock { get; set; }
 
+
        
         //public int QrCodeInfoID { get; set; }
 
@@ -26,6 +27,8 @@ namespace BarkodSistem.Models
 
         public int CategoryID { get; set; }
         public  Category Category { get; set; }
+
+  
 
     }
 }

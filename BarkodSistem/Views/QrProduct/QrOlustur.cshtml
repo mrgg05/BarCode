@@ -41,10 +41,12 @@
                     </div>
                 </div>
             </div>*@
+           
             @if (ViewBag.imageBytes != null)
             {
                 <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(ViewBag.imageBytes))" height="150" width="150" />
             }
+          
 
         </div>
     </form>

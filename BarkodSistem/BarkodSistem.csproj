@@ -193,6 +193,14 @@
     <Compile Include="Migrations\201902260535510_aa.Designer.cs">
       <DependentUpon>201902260535510_aa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902280552404_aa1.cs" />
+    <Compile Include="Migrations\201902280552404_aa1.Designer.cs">
+      <DependentUpon>201902280552404_aa1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902280558321_aak.cs" />
+    <Compile Include="Migrations\201902280558321_aak.Designer.cs">
+      <DependentUpon>201902280558321_aak.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -222,6 +230,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.tabledit.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -300,6 +309,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902260535510_aa.resx">
       <DependentUpon>201902260535510_aa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902280552404_aa1.resx">
+      <DependentUpon>201902280552404_aa1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902280558321_aak.resx">
+      <DependentUpon>201902280558321_aak.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
